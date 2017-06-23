@@ -1,71 +1,32 @@
 //https://code.tutsplus.com/tutorials/token-based-authentication-with-angularjs-nodejs--cms-22543
 // Required Modules
 var express = require('express');
+var path = require('path');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var jwt = require('jsonwebtoken');
 var mongoose = require("mongoose");
 var app = express();
+var User = require('./Models/User');
+var router = express.Router();
 
-//define port
-var port = process.env.PORT || 3001;
-var User = require('./User');
 
-/* 
- * Mongoose by default sets the auto_reconnect option to true.
- * We recommend setting socket options at both the server and replica set level.
- * We recommend a 30 second connection timeout because it allows for 
- * plenty of time in most operating environments.
- */
-var options = {
-  server: {
-    socketOptions: {
-      keepAlive: 300000,
-      connectTimeoutMS: 30000
-    }
-  },
-  replset: {
-    socketOptions: {
-      keepAlive: 300000,
-      connectTimeoutMS: 30000
-    }
-  }
-};
-
-//define MongoDB database URL
-var mongodbUri = 'mongodb://raj:password@ds129462.mlab.com:29462/userauth';
-
-//open a connection to database
-mongoose.connect(mongodbUri, options);
-//test database connection
-var conn = mongoose.connection;
-conn.on('error', console.error.bind(console, "connection error"));
-conn.on('open', () => {
-  console.log("Connected to database");
-  //if connected to db, then start the app, listening on given port
-  app.listen(port);
-  console.log("listening on " + port);
-});
-//App congifuration
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
-app.use(bodyParser.json());
-app.use(morgan("dev"));
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization');
-  next();
+//Serve the index page 
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname + '/index.html'));
 });
 
-//If uncaughtException occurs, then the Nodejs App crash is prevented and an error log is printed in the console
-process.on('uncaughtException', function (err) {
-  console.log(err);
+//Serve Static files
+app.use('/_resources', express.static(path.join(__dirname, '/_resources')));
+app.use('/bower_components', express.static(path.join(__dirname, '/bower_components')));
+app.use('/partials', express.static(__dirname + '/partials'));
+
+/*Routing*/
+app.get('/home', function (req, res) {
+  res.sendFile(path.join(__dirname + '/partials/home.html'));
 });
 
 //define request handlers
-
 /*Authenticate User on Sign-in/log in*/
 app.post('/authenticate', (req, res) => {
   User.findOne({
