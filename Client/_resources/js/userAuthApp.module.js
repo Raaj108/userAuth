@@ -1,1 +1,1 @@
-angular.module('userAuthApp', ['ngStorage', 'ngRoute']);
+angular.module('userAuthApp', []);
