@@ -2,32 +2,34 @@
 <html lang="en" ng-app="userAuthApp">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" media="screen" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+    <title>UserAuth- An User Authentication App</title>
+    <!--  -->
+    <style>
 
-  <link rel="stylesheet" media="screen" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
-  <title>UserAuth- An User Authentication App</title>
-  <!--  -->
-  <style>
 
-
-  </style>
+    </style>
 </head>
 
 <body>
-  <div ng-controller="userAuthCtrl"><a href="/home">Home</a> <a href="/login">Login</a> <a href="/signup">Signup</a> {{name}}
-  </div>
-  <div ng-view></div>
-  <script src="bower_components/jquery/dist/jquery.js"></script>
-  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/angular-route/angular-route.js"></script>
-  <script src="bower_components/ngstorage/ngStorage.js"></script>
-  <script src="public/_resources/js/userAuthApp.module.js"></script>
-  <script src="public/_resources/js/userAuthApp.config.js"></script>
-  <script src="public/_resources/js/userAuthApp.directive.js"></script>
-  <script src="public/_resources/js/userAuthApp.service.js"></script>
-  <script src="public/_resources/js/userAuthApp.controller.js"></script>
+    <ul>
+        <li><a href="/login">Login</a></li>
+        <li> <a href="/signup">Signup</a> </li>
+    </ul>
+
+    <div ng-view></div>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/ngstorage/ngStorage.js"></script>
+    <script src="public/_resources/js/userAuthApp.module.js"></script>
+    <script src="public/_resources/js/userAuthApp.config.js"></script>
+    <script src="public/_resources/js/userAuthApp.directive.js"></script>
+    <script src="public/_resources/js/userAuthApp.service.js"></script>
+    <script src="public/_resources/js/userAuthApp.controller.js"></script>
 </body>
 
 </html>
